@@ -24,20 +24,23 @@ func (l *List) Show() {
 			tmp = l.head.next
 		}
 		// second print nodes from the end
-		for i:=1; i<l.length; i++ {
-			fmt.Println(tmp)
+		for i:=0; i<l.length; i++ {
+			fmt.Println(tmp.Data)
 			tmp = tmp.prev
 		}
 	}
 }
 
-func (l *List) Append(node *Node) {
+func (l *List) Append(data ... interface{}) {
+	for _, d:= range data {
+	node := &Node{Data:d}
 	node.next = l.head
 	if l.head != nil {
 		l.head.prev = node
 	}
 	l.head = node
 	l.length++
+}
 }
 
 // func (l *List) Remove(node *Node) {
