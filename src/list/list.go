@@ -10,34 +10,21 @@ type Node struct {
 	Prev *Node
 }
 
+
 type List struct {
 	head *Node
 	length int
 }
 
-func(l *List) Head() *Node {
-	return l.head
-}
-
-func(l *List) SetHead(node *Node) {
-	l.head = node
-}
-
-func(l *List) Length() int {
-	return l.length
-}
-
-func(l *List) SetLength(length int) {
-	l.length = length
-}
-
 func (l *List) Show() {
 	if l.length != 0 {
 		tmp := l.head
+		fmt.Println("head", tmp.Data)
 		// List.Append(n) work as stack append
 		// so first find the last node
 		for i:=1; i<l.length; i++ {
 			tmp = tmp.Next
+			fmt.Println("last", tmp.Data)
 		}
 		// second print nodes from the end
 		for i:=0; i<l.length; i++ {
@@ -46,6 +33,7 @@ func (l *List) Show() {
 		}
 	}
 }
+
 
 func (l *List) Append(data ... interface{}) {
 	for _, d:= range data {
@@ -59,17 +47,6 @@ func (l *List) Append(data ... interface{}) {
 }
 }
 
-func (l *List) Remove(index int) bool{
-	if l.length != 0 {
-		tmp := l.head
-		for i:=0; i<l.length; i++ {
-			if index==i {
-				tmp.Prev.Next = tmp.Next
-				l.length--
-				return true
-			}
-			tmp = tmp.Next
-		}
-	}
-	return false
-}
+// func (l *List) Remove(node *Node) {
+
+// }
