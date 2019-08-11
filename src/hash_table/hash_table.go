@@ -43,7 +43,6 @@ func (ht *HashTable) tableOverflowed() bool {
 }
 
 func (ht *HashTable) Insert(data interface{}, key int) bool {
-	//fmt.Println(ht.table)
 	if ht.tableOverflowed() || key < 0{
 		return false
 	} else {
@@ -62,7 +61,6 @@ func (ht *HashTable) Delete(key int) bool {
 		hash := key % len(ht.table)
 		for hash != len(ht.table) {
 			hash = hash % len(ht.table)
-			//fmt.Println("hash", hash)
 			if ht.table[hash] != nil && ht.table[hash].Key == key {
 				ht.table[hash] = nil
 				return true
@@ -74,25 +72,26 @@ func (ht *HashTable) Delete(key int) bool {
 }
 
 func (ht *HashTable) GetNode(key int) *Node {
+	fmt.Println("KEY", key)
 	hash := key % len(ht.table)
 	for hash != len(ht.table) {
+		hash = hash % len(ht.table)
+		fmt.Println("hash", hash)
 		if ht.table[hash] != nil && ht.table[hash].Key == key {
 			return ht.table[hash]
 		}
-		hash = (hash+1) % len(ht.table)
+		hash = hash+1
 	}
 	return nil
 }
 
 func (ht *HashTable) Show() {
 	arr := make([]Node, len(ht.table))
-	//fmt.Println(len(ht.table))
 	for ind, v := range ht.table {
 		if v != nil {
 		arr[ind] = *v
 		}
 	}
-	fmt.Println(ht.table)
 	fmt.Println(arr)
 }
 
